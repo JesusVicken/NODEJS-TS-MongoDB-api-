@@ -13,7 +13,11 @@ app.setErrorHandler((error, require, reply) => {
 const start = async () => {
 
 
-    await app.register(cors);
+    await app.register(cors, {
+        origin: "http://localhost:5173", // Permite requisições apenas do seu frontend
+        methods: ["GET", "POST", "PUT", "DELETE"], // Permite DELETE
+        allowedHeaders: ["Content-Type"]
+    });
     await app.register(routes);
 
     try {
